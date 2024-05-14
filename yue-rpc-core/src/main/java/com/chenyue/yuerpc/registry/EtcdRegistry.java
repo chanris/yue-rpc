@@ -43,7 +43,6 @@ public class EtcdRegistry implements Registry{
     @Override
     public void init(RegistryConfig registryConfig) {
         client = Client.builder()
-                .endpoints(registryConfig.getAddress())
     }
 
     @Override
