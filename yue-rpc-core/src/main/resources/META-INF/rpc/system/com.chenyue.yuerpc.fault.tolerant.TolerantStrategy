@@ -1,0 +1,4 @@
+failBack=com.chenyue.yuerpc.fault.tolerant.FailBackTolerantStrategy
+failFast=com.chenyue.yuerpc.fault.tolerant.FailFastTolerantStrategy
+failOver=com.chenyue.yuerpc.fault.tolerant.FailOverTolerantStrategy
+failSafe=com.chenyue.yuerpc.fault.tolerant.FailSafeTolerantStrategy

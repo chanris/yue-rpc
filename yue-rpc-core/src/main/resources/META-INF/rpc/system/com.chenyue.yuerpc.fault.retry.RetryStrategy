@@ -1,0 +1,2 @@
+no=com.chenyue.yuerpc.fault.retry.NoRetryStrategy
+fixedInterval=com.chenyue.yuerpc.fault.retry.FixedIntervalRetryStrategy
