@@ -45,7 +45,6 @@ public class VertxTcpClient {
             header.setRequestId(IdUtil.getSnowflakeNextId());
             protocolMessage.setHeader(header);
             protocolMessage.setBody(rpcRequest);
-
             //编码请求
             try {
                 Buffer encodeBuffer = ProtocolMessageEncoder.encode(protocolMessage);
@@ -61,8 +60,8 @@ public class VertxTcpClient {
                             ProtocolMessage<RpcResponse> rpcResponseProtocolMessage =
                                     (ProtocolMessage<RpcResponse>)ProtocolMessageDecoder.decode(buffer);
                             responseFuture.complete(rpcResponseProtocolMessage.getBody());
-                        }catch (IOException e) {
-                            throw new RuntimeException("协议消息解码错误");
+                        }catch (Exception e) {
+                            throw new RuntimeException("协议消息解码错误", e);
                         }
                     }
             );

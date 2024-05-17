@@ -22,6 +22,7 @@ public class ProviderBootstrap {
     /**
      * 初始化
      * @param serviceRegisterInfoList
+     * 从ProviderExample 获得 需要注册的服务
      */
     public static void init(List<ServiceRegisterInfo<?>> serviceRegisterInfoList) {
         // RPC 框架初始化（配置和注册中心）

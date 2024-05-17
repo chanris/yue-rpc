@@ -11,6 +11,7 @@ import io.etcd.jetcd.options.GetOption;
 import io.etcd.jetcd.options.PutOption;
 import io.etcd.jetcd.watch.WatchEvent;
 import io.vertx.core.impl.ConcurrentHashSet;
+import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
  * @date 14/5/2024
  * @description
  */
+@Slf4j
 public class EtcdRegistry implements Registry{
 
     private Client client;
@@ -130,7 +132,9 @@ public class EtcdRegistry implements Registry{
             public void execute() {
                 for (String key: localRegisterNodeKeySet) {
                     try {
-                        List<KeyValue> keyValues = kvClient.get(ByteSequence.from(key, StandardCharsets.UTF_8)).get().getKvs();
+                        List<KeyValue> keyValues = kvClient.get(ByteSequence.from(key, StandardCharsets.UTF_8))
+                                .get()
+                                .getKvs();
                         // 该节点已过期（需要重启节点才能重新注册）
                         if (CollUtil.isEmpty(keyValues)) {
                             continue;
@@ -146,6 +150,10 @@ public class EtcdRegistry implements Registry{
                 }
             }
         });
+
+        // 支持秒级 定时任务
+        CronUtil.setMatchSecond(true);
+        CronUtil.start(); // 开启任务
     }
 
     /**

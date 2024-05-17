@@ -6,6 +6,8 @@ import com.chenyue.yuerpc.config.RpcConfig;
 import com.chenyue.yuerpc.constant.RpcConstant;
 import com.chenyue.yuerpc.fault.retry.RetryStrategy;
 import com.chenyue.yuerpc.fault.retry.RetryStrategyFactory;
+import com.chenyue.yuerpc.fault.tolerant.TolerantStrategy;
+import com.chenyue.yuerpc.fault.tolerant.TolerantStrategyFactory;
 import com.chenyue.yuerpc.loadbalancer.LoadBalancer;
 import com.chenyue.yuerpc.loadbalancer.LoadBalancerFactory;
 import com.chenyue.yuerpc.model.RpcRequest;
@@ -13,6 +15,7 @@ import com.chenyue.yuerpc.model.RpcResponse;
 import com.chenyue.yuerpc.model.ServiceMetaInfo;
 import com.chenyue.yuerpc.registry.Registry;
 import com.chenyue.yuerpc.registry.RegistryFactory;
+import com.chenyue.yuerpc.server.tcp.VertxTcpClient;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -55,7 +58,7 @@ public class ServiceProxy implements InvocationHandler {
         serviceMetaInfo.setServiceVersion(RpcConstant.DEFAULT_SERVICE_VERSION);
         List<ServiceMetaInfo> serviceMetaInfoList = registry.serviceDiscovery(serviceMetaInfo.getServiceKey());
         if (CollUtil.isEmpty(serviceMetaInfoList)) {
-            throw new RuntimeException("暂未服务地址");
+            throw new RuntimeException("暂无服务地址");
         }
 
         //负载均衡
@@ -66,16 +69,15 @@ public class ServiceProxy implements InvocationHandler {
         ServiceMetaInfo selectServiceMetaInfo = loadBalancer.select(requestParams, serviceMetaInfoList);
 
         // rpc请求
-        /*RpcResponse response;
+        RpcResponse rpcResponse;
         try {
             RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
-            response = retryStrategy.doRetry(() -> {
-
-            });
+            rpcResponse = retryStrategy.doRetry(() -> VertxTcpClient.doRequest(rpcRequest, selectServiceMetaInfo));
         }catch (Exception e) {
-
+            //容错机制
+            TolerantStrategy tolerantStrategy = TolerantStrategyFactory.getInstance(rpcConfig.getTolerantStrategy());
+            rpcResponse = tolerantStrategy.doTolerant(null, e);
         }
-        return response.getData();*/
-        return null;
+        return rpcResponse.getData();
     }
 }
