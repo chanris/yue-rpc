@@ -1,7 +1,6 @@
 package com.chenyue.yuerpc.server;
 
 /**
- * HTTP 服务器接口
  *
  * @author chenyue7@foxmail.com
  * @date 14/5/2024
