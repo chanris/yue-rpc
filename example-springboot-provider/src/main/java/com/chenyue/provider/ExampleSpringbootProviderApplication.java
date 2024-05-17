@@ -1,4 +1,4 @@
-package com.chenyue.consumer;
+package com.chenyue.provider;
 
 import com.chenyue.springboot.starter.annotation.EnableYueRpc;
 import org.springframework.boot.SpringApplication;
@@ -9,10 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 17/5/2024
  * @description
  */
-@EnableYueRpc(needServer = false)
+@EnableYueRpc
 @SpringBootApplication
-public class ExampleSpringbootConsumerApplication {
+public class ExampleSpringbootProviderApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ExampleSpringbootConsumerApplication.class, args);
+        SpringApplication.run(ExampleSpringbootProviderApplication.class, args);
     }
+
 }

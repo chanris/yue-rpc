@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  * @date 17/5/2024
  * @description
  */
-@Target({ElementType.TYPE}) // 注解的范围
+@Target({ElementType.FIELD}) // 注解的范围
 @Retention(RetentionPolicy.RUNTIME) // 注解作用域
 public @interface RpcReference {
 
