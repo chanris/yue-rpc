@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * @author chenyue7@foxmail.com
  * @date 16/5/2024
- * @description
+ * @description 转移到其他服务节点 - 容错策略
  */
 public class FailOverTolerantStrategy implements TolerantStrategy{
     @Override
