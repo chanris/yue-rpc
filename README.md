@@ -1,6 +1,6 @@
 # yue-rpc
 手写rpc框架 power by [鱼皮rpc](https://github.com/liyupi/yu-rpc)。
-基于Java + Etcd + Vert.x的高性能RPC框架，使用多种最新技术。其中，你可以学习到基于Vert.x的网络服务器开发、多种序列化器的实现、基于Etcd、Zookeeper等的注册中心、Java反射、动态代理、自定义网络协议开发、多种设计模式（单例、工厂、装饰者）、多种负载均衡实现、多种重试和容错机制、Spring Boot Stater开发等，大幅度对rpc底层原理的理解。
+基于Java + Etcd + Vert.x的高性能RPC框架，使用多种最新技术。其中，你可以学习到基于Vert.x的网络服务器开发、多种序列化器的实现、基于Etcd、Zookeeper等的注册中心、Java反射、动态代理、自定义网络协议开发、多种设计模式（单例、工厂、装饰者）、多种负载均衡实现、多种重试和容错机制、Spring Boot Stater开发等，大幅度提高对rpc底层原理的理解。
 
 ## 技术选型
 
