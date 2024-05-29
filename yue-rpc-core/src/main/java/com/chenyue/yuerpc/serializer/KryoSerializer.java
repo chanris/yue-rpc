@@ -1,8 +1,10 @@
 package com.chenyue.yuerpc.serializer;
 
 import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -34,6 +36,10 @@ public class KryoSerializer implements Serializer{
 
     @Override
     public <T> T deserialize(byte[] bytes, Class<T> type) throws IOException {
-        return null;
+        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+        Input input = new Input(bis);
+        T result = KRYO_THREAD_LOCAL.get().readObject(input, type);
+        input.close();
+        return result;
     }
 }
