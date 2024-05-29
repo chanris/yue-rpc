@@ -15,7 +15,6 @@ import java.util.TreeMap;
  * 旨在解决动态变化环境下数据分布的平衡和效率问题。最初是为了解决在分布式缓存系统中，
  * 节点（服务器）数据变化式，如何尽量减少数据迁移的问题。
  *
- * //todo 24/5/16
  */
 public class ConsistentHashLoadBalancer implements LoadBalancer{
 
